@@ -1,0 +1,1 @@
+# django-online-shop
