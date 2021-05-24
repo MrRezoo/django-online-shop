@@ -15,17 +15,17 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('full_name', 'phone_number', 'email', 'is_admin')
     list_filter = ('is_admin',)
     fieldsets = (
-        (None, {'fields': ('full_name', 'email', 'phone_number', 'password')}),
+        ('Main', {'fields': ('full_name', 'email', 'phone_number', 'password')}),
         ('Personal info', {'fields': ('is_active',)}),
         ('Permissions', {'fields': ('is_admin',)}),
     )
     add_fieldsets = (
         (None, {
-            'fields': ('full_name', 'phone_number', 'email', 'password', 'confirmed_password')
-        })
+            'fields': ('full_name', 'phone_number', 'email', 'password1', 'password2')
+        }),
     )
-    search_fields = ('email', 'full_name', 'phone_number')
-    ordering = ('full_name', 'email')
+    search_fields = ('email',)
+    ordering = ('email',)
     filter_horizontal = ()
 
 
