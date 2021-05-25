@@ -1,13 +1,31 @@
 {% extends 'base.html' %}
+{% load thumbnail %}
 
 {% block title-head %}
     Online Shop
 {% endblock %}
 
 {% block lead %}
-    this project made with Django 💎 ❤️
+    this project made with Django 💎 ❤️ Home PAGE
 {% endblock %}
 
 {% block content %}
-    <h3>Home</h3>
+    {% for category in categories %}
+        <a href="{{ category.get_absolut_url }}" class="btn btn-warning">{{ category.name }}</a>
+    {% endfor %}
+    <br><br>
+    <br><br>
+    {% for product in products %}
+        <div class="card" style="width: 18rem; display: inline-block">
+            {% thumbnail product.image "300x300" as img %}
+                <img src="{{ img.url }}" class="card-img-op" alt="...">
+            {% endthumbnail %}
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description|truncatewords:5 }}</p>
+                <a href="{{ product.get_absolut_url }}" class="btn btn-primary">show detail</a>
+            </div>
+        </div>
+    {% endfor %}
+
 {% endblock %}
