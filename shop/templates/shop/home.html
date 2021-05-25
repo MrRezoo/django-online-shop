@@ -11,7 +11,19 @@
 
 {% block content %}
     {% for category in categories %}
-        <a href="{{ category.get_absolut_url }}" class="btn btn-warning">{{ category.name }}</a>
+        <div class="btn-group">
+            <a href="{{ category.get_absolut_url }}" class="btn btn-danger">{{ category.name }}</a>
+            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+
+            </button>
+            <ul class="dropdown-menu">
+                {% for sub in category.sub_categories.all %}
+                    <li><a class="dropdown-item" href="{{ sub.get_absolut_url }}">{{ sub.name }}</a></li>
+                {% endfor %}
+
+            </ul>
+        </div>
     {% endfor %}
     <br><br>
     <br><br>
