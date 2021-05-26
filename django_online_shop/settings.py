@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'shop.apps.ShopConfig',
     'sorl.thumbnail',
+    'cart.apps.AppConfig'
 ]
 
 MIDDLEWARE = [
