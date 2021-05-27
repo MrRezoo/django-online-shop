@@ -9,7 +9,7 @@ from django.views.decorators.http import require_POST
 
 def detail(request):
     cart = Cart(request)
-    return render(request, template_name='cart/detail.html')
+    return render(request, template_name='cart/detail.html', context={'cart': cart})
 
 
 @require_POST

@@ -1,3 +1,7 @@
+from decimal import Decimal
+
+from shop.models import Product
+
 CART_SESSION_ID = 'cart'
 
 
@@ -5,6 +9,16 @@ class Cart:
     def __init__(self, request):
         self.session = request.session
         self.cart = self.add_cart_session()
+
+    def __iter__(self):
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+        cart = self.cart.copy()
+        for product in products:
+            cart[str(product.id)]['product'] = product
+        for item in cart.values():
+            item['total_price'] = Decimal(item['price']) * Decimal(item['quantity'])
+            yield item
 
     def add_cart_session(self):
         cart = self.session.get(CART_SESSION_ID)
