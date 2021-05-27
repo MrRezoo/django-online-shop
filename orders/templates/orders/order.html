@@ -16,6 +16,7 @@
 
 {% block content %}
     <p>Total : {{ order.get_total_price }}</p>
+    <a href="{% url 'orders:payment' order.get_total_price %}" class="btn btn-danger">Pay</a>
 {% endblock %}
 
 

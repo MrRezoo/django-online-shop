@@ -29,7 +29,7 @@ class Product(models.Model):
     slug = models.SlugField(max_length=200)
     image = models.ImageField(upload_to='products/%Y/%b/%d/')
     description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    price = models.IntegerField()
     status = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
