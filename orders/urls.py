@@ -9,4 +9,5 @@ urlpatterns = [
     path('<int:order_id>/', views.detail, name='detail'),
     path('payment/<int:order_id>/<int:price>', views.payment, name='payment'),
     path('verify/', views.verify, name='verify'),
+    path('apple-coupon/<int:order_id>', views.coupon_apply, name='coupon_apply'),
 ]

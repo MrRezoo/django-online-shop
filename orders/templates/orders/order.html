@@ -16,6 +16,17 @@
 
 {% block content %}
     <p>Total : {{ order.get_total_price }}</p>
+
+    <form action="{% url 'orders:coupon_apply' order.id %}" method="post">
+        {% csrf_token %}
+        <div class="col-2">
+            {{ form }}
+        </div>
+        <br>
+        <input type="submit" value="Apply Code" class="btn btn-warning btn-sm">
+    </form>
+
+    <br>
     <a href="{% url 'orders:payment' order.id order.get_total_price %}" class="btn btn-danger">Pay</a>
 {% endblock %}
 
