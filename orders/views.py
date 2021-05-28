@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
@@ -33,8 +34,8 @@ CallbackURL = 'http://localhost:8000/orders/verify/'  # Important: need to edit 
 
 
 @login_required()
-def payment(request, price):
-    global amount
+def payment(request, order_id, price):
+    global amount, o_id
     amount = price
     result = client.service.PaymentRequest(MERCHANT, amount, description, request.user.email, mobile, CallbackURL)
     if result.Status == 100:
@@ -48,6 +49,10 @@ def verify(request):
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
+            order = Order.objects.get(id=o_id)
+            order.status = True
+            order.save()
+            messages.success(request,'Transaction was successfully','success')
             return HttpResponse('Transaction success.\nRefID: ' + str(result.RefID))
         elif result.Status == 101:
             return HttpResponse('Transaction submitted : ' + str(result.Status))
