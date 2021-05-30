@@ -14,7 +14,7 @@ Hello friends of this [Mr.Rezoo](https://www.linkedin.com/in/mrrezoo/)
 
 ## General info
 
-Work on little complete online shop with Django language . . .
+Work on little complete online shop with Django . . .
 
 Some features we worked on
 
